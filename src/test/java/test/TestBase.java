@@ -17,7 +17,7 @@ public class TestBase {
         driver.navigate().to("https://codenboxautomationlab.com/registration-form/");
     }
 
-    @AfterSuite(enabled = false)
+    @AfterSuite()
     public void stopDriver()
     {
         driver.quit();
