@@ -1,0 +1,10 @@
+<?xml version="7.8.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Book_course ">
+    <test name="User_Regestration">
+        <classes>
+            <class name="required_fields_validations"/>
+            <class name="day1.module2"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
