@@ -1,16 +1,10 @@
 package pages;
 
-import dev.failsafe.internal.util.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
-
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 public class Regesteration extends PageBase{
     public Regesteration(WebDriver driver){
