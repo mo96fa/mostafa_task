@@ -1,10 +1,13 @@
 package test;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Regesteration;
-
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class  userCanRegister extends TestBase {
 
@@ -17,10 +20,11 @@ public class  userCanRegister extends TestBase {
     {
         registerationObject = new Regesteration(driver);
         registerationObject.click_register();
-        Assert.assertEquals(registerationObject.f_name_error.getText(), "This is a required field.");
-        Assert.assertEquals(registerationObject.l_name_error.getText(),"This is a required field.");
-        Assert.assertEquals(registerationObject.email_error.getText(),"This is a required field.");
-        Assert.assertEquals(registerationObject.radio_error.getText(),"This is a required field.");
+        String error_message = "This is a required field.";
+        Assert.assertEquals(registerationObject.f_name_error.getText(), error_message);
+        Assert.assertEquals(registerationObject.l_name_error.getText(), error_message);
+        Assert.assertEquals(registerationObject.email_error.getText(), error_message);
+        Assert.assertEquals(registerationObject.radio_error.getText(), error_message);
         driver.navigate().to(driver.getCurrentUrl());
     }
 
@@ -104,7 +108,13 @@ public class  userCanRegister extends TestBase {
     public void user_can_register_successfully()
     {
         registerationObject = new Regesteration(driver);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Duration timeout = Duration.ofSeconds(10);
+        Wait<WebDriver> wait = new FluentWait< >(driver)
+                .withTimeout(timeout)
+                .pollingEvery(timeout)
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//*[@id=\"nf-form-3-cont\"]/div/div[1]/p")));
         Assert.assertEquals(registerationObject.confirmation.getText(), "Your registration is completed. We will contact with you soon. Thank you !");
     }
 }
